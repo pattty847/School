@@ -1,0 +1,17 @@
+{
+    'coins': 
+    [{'item': 
+    {
+        'id': 'plant-vs-undead-token',
+        'coin_id': 17461,
+        'name': 'Plant vs Undead Token', 
+        'symbol': 'PVU', 
+        'market_cap_rank': 426, 
+        'thumb': 'https://assets.coingecko.com/coins/images/17461/thumb/token-200x200.png?1627883446', 
+        'small': 'https://assets.coingecko.com/coins/images/17461/small/token-200x200.png?1627883446', 
+        'large': 'https://assets.coingecko.com/coins/images/17461/large/token-200x200.png?1627883446', 
+        'slug': 'plant-vs-undead-token', 
+        'price_btc': 0.00018833269914766626, 
+        'score': 0}}],
+    'exchanges': []
+}
