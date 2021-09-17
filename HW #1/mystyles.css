@@ -1,0 +1,49 @@
+
+/*
+    An HTML tag will inherit all the styles of its 
+    parent element(s) unless it is specifically given 
+    a contrary CSS rule.
+*/
+
+/*
+    Class Example: .name
+    
+    .title: Any pages title
+    Use: .x
+
+------------------------------------------------------------
+
+    "How to solve a Rubik's Cube" CSS
+*/
+.home-title {
+    color: #0a4bc4;
+    text-align: center;
+}
+
+/*
+    "Step #1, Step #2, etc" CSS
+*/
+.step-title {
+    color: black;
+}
+
+
+* {
+    border: 1px solid red;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+
+/*
+    ID Example: #ID-NAME
+    
+    #title: Any pages title
+    Use: #y
+*/
+#front-title {
+    color: black;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: gray;
+}
