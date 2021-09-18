@@ -15,3 +15,14 @@
         'score': 0}}],
     'exchanges': []
 }
+
+    dpg.add_button(id = index["terminal"]['bitcoin'], label="Bitcoin") 
+    dpg.add_same_line()
+    dpg.add_button(id = index["terminal"]['ethereum'], label="Ethereum") 
+    dpg.add_same_line()
+    dpg.add_button(id = index["terminal"]['chainlink'], label="Chainlink") 
+    dpg.add_same_line()
+    dpg.add_button(id = index["terminal"]['harmony'], label="Harmony") 
+    dpg.add_same_line()
+    dpg.add_button(id = index["terminal"]['cardano'], label="Cardano") 
+    dpg.add_same_line()
