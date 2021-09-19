@@ -18,19 +18,32 @@ reddit = praw.Reddit(
 )
 
 # Subreddit to search for memes
-subreddit = reddit.subreddit("meme")
+names = ["dankmemes", "memes", "MemeEconomy", "crappyoffbrands", "4chan"]
 
-# Loop through the top posts in the subreddit, limit 10 posts
-for submission in subreddit.top(limit=10):
 
-    # Grab URL and the extension
-    url = str(submission.url)
-    extension = url[-4:]
-    print(extension)
+def get_top_10(names):
 
-    # Store content of url in request
-    response = requests.get(url)
+    for every in names:
 
-    file = open(submission.id + extension, "wb")
-    file.write(response.content)
-    file.close()
+        subreddit = reddit.subreddit(every)
+
+        # Loop through the top posts in the subreddit, limit 10 posts
+        for submission in subreddit.top(limit=5):
+
+            # Grab URL and the extension
+            url = str(submission.url)
+            if(url.endswith("png") or url.endswith("jpeg") or url.endswith("jpg")):
+                extension = url[-4:]
+                print(extension)
+
+                # Store content of url in request
+                response = requests.get(url)
+
+                images_file = open(every + "-" + submission.id + extension, "wb")
+                images_file.write(response.content)
+                images_file.close()
+
+
+
+if names != None:
+    get_top_10(names)
