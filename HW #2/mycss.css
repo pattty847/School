@@ -1,0 +1,72 @@
+/*
+    ID CSS Styles
+*/
+
+#benz-title {
+    text-align: center;
+    font-size: 50px;
+    color:aliceblue;
+}
+
+#model-title {
+    color:antiquewhite;
+    font-size: 40px;
+    text-align: right;
+}
+
+#model-price {
+    color:antiquewhite;
+    font-size: 30px;
+    text-align: right;
+}
+
+#model-specs {
+    font-family: fantasy;
+    text-align: right;
+}
+
+#overview-block {
+    display: inline;
+    float: left;
+}
+
+#title-block {
+    display: inline;
+    float: right;
+}
+
+#about-block {
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: right;
+}
+
+
+
+/*
+    CLASS CSS Styles
+*/
+
+.link {
+    font-size: 25px;
+    color: firebrick;
+}
+
+.list {
+    color:lightsalmon;
+}
+
+/*
+    General Rules
+*/
+
+body {
+    background-color: rgba(0, 0, 0, .6);
+    background-image: url("images/car.jpg");
+    background-blend-mode: multiply;
+    background-size:cover;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:blanchedalmond;
+}
