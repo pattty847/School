@@ -1,27 +1,109 @@
 {
-    'item': 
-    {
-        'id': 'polkabridge',
-        'coin_id': 13744, 
-        'name': 'PolkaBridge', 
-        'symbol': 'PBR', 
-        'market_cap_rank': 872, 
-        'thumb': 'https://assets.coingecko.com/coins/images/13744/thumb/symbol-whitebg200x200.png?1611377553', 
-        'small': 'https://assets.coingecko.com/coins/images/13744/small/symbol-whitebg200x200.png?1611377553', 
-        'large': 'https://assets.coingecko.com/coins/images/13744/large/symbol-whitebg200x200.png?1611377553', 
-        'slug': 'polkabridge', 
-        'price_btc': 1.0522460892523462e-05, 
-        'score': 0
+    'coins': [{
+            'item': {
+                'coin_id': 17461,
+                'id': 'plant-vs-undead-token',
+                'large': 'https://assets.coingecko.com/coins/images/17461/large/token-200x200.png?1627883446',
+                'market_cap_rank': 451,
+                'name': 'Plant vs Undead Token',
+                'price_btc': 0.00016258535729344725,
+                'score': 0,
+                'slug': 'plant-vs-undead-token',
+                'small': 'https://assets.coingecko.com/coins/images/17461/small/token-200x200.png?1627883446',
+                'symbol': 'PVU',
+                'thumb': 'https://assets.coingecko.com/coins/images/17461/thumb/token-200x200.png?1627883446'
+            }
+        },
+        {
+            'item': {
+                'coin_id': 825,
+                'id': 'binancecoin',
+                'large': 'https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615',
+                'market_cap_rank': 5,
+                'name': 'Binance Coin',
+                'price_btc': 0.008543962633925888,
+                'score': 1,
+                'slug': 'binance-coin',
+                'small': 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png?1547034615',
+                'symbol': 'BNB',
+                'thumb': 'https://assets.coingecko.com/coins/images/825/thumb/binance-coin-logo.png?1547034615'
+            }
+        },
+        {
+            'item': {
+                'coin_id': 10366,
+                'id': 'smooth-love-potion',
+                'large': 'https://assets.coingecko.com/coins/images/10366/large/SLP.png?1578640057',
+                'market_cap_rank': 337,
+                'name': 'Smooth Love Potion',
+                'price_btc': 1.4723617993681174e-06,
+                'score': 2,
+                'slug': 'smooth-love-potion',
+                'small': 'https://assets.coingecko.com/coins/images/10366/small/SLP.png?1578640057',
+                'symbol': 'SLP',
+                'thumb': 'https://assets.coingecko.com/coins/images/10366/thumb/SLP.png?1578640057'
+            }
+        },
+        {
+            'item': {
+                'coin_id': 4128,
+                'id': 'solana',
+                'large': 'https://assets.coingecko.com/coins/images/4128/large/coinmarketcap-solana-200.png?1616489452',
+                'market_cap_rank': 7,
+                'name': 'Solana',
+                'price_btc': 0.0032025697004302803,
+                'score': 3,
+                'slug': 'solana',
+                'small': 'https://assets.coingecko.com/coins/images/4128/small/coinmarketcap-solana-200.png?1616489452',
+                'symbol': 'SOL',
+                'thumb': 'https://assets.coingecko.com/coins/images/4128/thumb/coinmarketcap-solana-200.png?1616489452'
+            }
+        },
+        {
+            'item': {
+                'coin_id': 11061,
+                'id': 'xdai-stake',
+                'large': 'https://assets.coingecko.com/coins/images/11061/large/xdai.png?1587714165',
+                'market_cap_rank': 426,
+                'name': 'xDAI Stake',
+                'price_btc': 0.00028255840696336364,
+                'score': 4,
+                'slug': 'xdai-stake',
+                'small': 'https://assets.coingecko.com/coins/images/11061/small/xdai.png?1587714165',
+                'symbol': 'STAKE',
+                'thumb': 'https://assets.coingecko.com/coins/images/11061/thumb/xdai.png?1587714165'
+            }
+        },
+        {
+            'item': {
+                'coin_id': 1,
+                'id': 'bitcoin',
+                'large': 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579',
+                'market_cap_rank': 1,
+                'name': 'Bitcoin',
+                'price_btc': 1.0,
+                'score': 5,
+                'slug': 'bitcoin',
+                'small': 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579',
+                'symbol': 'BTC',
+                'thumb': 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579'
+            }
+        },
+        {
+            'item': {
+                'coin_id': 12559,
+                'id': 'avalanche-2',
+                'large': 'https://assets.coingecko.com/coins/images/12559/large/coin-round-red.png?1604021818',
+                'market_cap_rank': 12,
+                'name': 'Avalanche',
+                'price_btc': 0.0013485571277700114,
+                'score': 6,
+                'slug': 'avalanche',
+                'small': 'https://assets.coingecko.com/coins/images/12559/small/coin-round-red.png?1604021818',
+                'symbol': 'AVAX',
+                'thumb': 'https://assets.coingecko.com/coins/images/12559/thumb/coin-round-red.png?1604021818'
+            }
         }
-    }
-
-    dpg.add_button(id = index["terminal"]['bitcoin'], label="Bitcoin") 
-    dpg.add_same_line()
-    dpg.add_button(id = index["terminal"]['ethereum'], label="Ethereum") 
-    dpg.add_same_line()
-    dpg.add_button(id = index["terminal"]['chainlink'], label="Chainlink") 
-    dpg.add_same_line()
-    dpg.add_button(id = index["terminal"]['harmony'], label="Harmony") 
-    dpg.add_same_line()
-    dpg.add_button(id = index["terminal"]['cardano'], label="Cardano") 
-    dpg.add_same_line()
+    ],
+    'exchanges': []
+}

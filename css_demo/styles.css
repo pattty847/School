@@ -1,0 +1,70 @@
+body {
+	background-color: #84ff38;
+	font-size: 18px;
+}
+
+aside {
+	background-color: #ff49fb;
+}
+
+aside p {
+	background-color: orange;
+	color: skyblue;
+}
+
+a {
+	background-color: white;
+	font-size: 12px;
+}
+
+p {
+	background-color: silver;
+	font-family: Calibri, Arial, "Century Gothic", sans-serif;
+	font-size: 20px;
+	width: 50%;
+}
+
+#planet-list {
+	background-color: skyblue;
+	width: 400px;
+}
+
+#planet-list li {
+	font-family: "Bauhaus 93";
+	border: 1px solid red;
+	width: 200px;
+}
+
+li.gas-giant {
+	font-size: 175%;
+	color: maroon;
+}
+
+li.rings {
+	text-decoration: underline; 
+}
+
+li.rings.gas-giant {
+	color: green;
+}
+
+#largest-planet {
+	font-size: 220%;
+}
+
+#earth {
+	background-color: blue;
+	color: white;
+}
+
+.fire {
+	background-color: red;
+	color: white;
+	font-weight: bold;
+}
+
+
+
+
+
+

@@ -28,7 +28,7 @@ def get_top_10(names):
         subreddit = reddit.subreddit(every)
 
         # Loop through the top posts in the subreddit, limit 10 posts
-        for submission in subreddit.top(limit=5):
+        for submission in subreddit.hot(limit=10):
 
             # Grab URL and the extension
             url = str(submission.url)
