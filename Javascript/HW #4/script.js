@@ -32,4 +32,5 @@ function calculateTax() {
 
     console.log("Total: $" + total)
 
+
 }
