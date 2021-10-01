@@ -1,0 +1,28 @@
+body {
+    font-family: Anton;
+    background-color: antiquewhite;
+}
+
+#header {
+    text-align: center;
+}
+
+#item-name {
+    display: inline-block;
+}
+
+#price-name {
+    display: inline-block;
+}
+
+#name-input {
+    float: inline-start;
+}
+
+#price-input {
+    float: inline-start;
+}
+
+#results-field {
+    float: right;
+}

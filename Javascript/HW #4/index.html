@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <title>Tax Calculator</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="script.js"></script>
+
+    <header id="header">
+        <h1>Tax Calculator</h1>
+        <hr>
+    </header>
+
+    <div id="description">
+        <p>
+            This page will allow you to enter prices of items to calculate the subtotal and the collected tax at 6%. <br> Make sure there is an item and price before pressing "Add Item" then "Calculate". There can be more than <br> one item added if needed.
+        </p>
+
+        <p id="results-field">
+
+        </p>
+    </div>
+
+    <div id="calculator">
+        <form id="item-form">
+            <p id="item-name">Item</p>
+            <input id="name-input" type="text">
+        </form>
+
+        <form id="price-form">
+            <p id="price-name">Price</p>
+            <input id="price-input" type="number">
+        </form>
+
+        <input type="submit" id="add-button" value="Add Item" onclick="addItem();"></input>
+
+        <input type="submit" id="calculate-button" value="Calculate" onclick="calculateTax();"></input>
+    </div>
+
+
+</body>
+
+</html>
