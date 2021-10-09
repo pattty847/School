@@ -1,10 +1,4 @@
-import time
-import json
 from flask import Flask, request
-import requests
-import hmac
-import hashlib
-import base64
 from kucoin.client import Market
 from kucoin.client import Trade
 from kucoin.client import User
