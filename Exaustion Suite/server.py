@@ -1,20 +1,24 @@
 import json
 from flask import Flask, request, abort
 from flask.templating import render_template
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
 from kucoin.client import Market, Trade, User
 
 app = Flask(__name__)
 
 # change
 
-@app.route('/')
-def welcome():
+@app.route('/index')
+def index():
     return render_template("index.html")
 
-@app.route('/crypto.html')
+@app.route('/crypto')
 def crypto():
     return render_template("crypto.html")
+
+@app.route('/')
+def redirectIndex():
+    return redirect(url_for("index"))
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -31,9 +35,9 @@ def webhook():
 
 # API Information
 # USDT ID: 61619d9942702600065eeb6d
-api_key = "6161393bbc85c200065b0ca5"
-api_secret = "bbe915da-6589-4187-92f5-a506de4b084b"
-api_passphrase = ""
+api_key = "6162fd36bc85c200065b10ea"
+api_secret = "5815f4e7-d387-455a-8edb-d5b0a36320c0"
+api_passphrase = "61619d9942702600065eeb6d"
 
 client = Trade(api_key, api_secret, api_passphrase, is_sandbox=True)
 user = User(api_key, api_secret, api_passphrase, is_sandbox=True)

@@ -1,16 +1,17 @@
-#crypto {
+body {
     background-color: rgb(13, 14, 15);
     font-family: Anton;
-}
-
-#title {
-    color: rgb(235, 235, 235);
-    text-align: center;
 }
 
 #display {
     padding-left: 100px;
     padding-right: 100px;
+}
+
+#insta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .images {
@@ -31,7 +32,7 @@
 }
 
 .main-nav {
-    text-align: center;
+    text-align: left;
     font-size: 30px;
 }
 
@@ -44,13 +45,13 @@
 }
 
 .nav a:hover {
-    background-color: rgba(245, 245, 220, .3);
+    background-color: rgba(21, 79, 189, .3);
 }
 
 .nav a {
     display: inline-block;
     font-size: 25px;
-    color: antiquewhite;
+    color: rgb(21, 79, 189);
     padding: .5em;
     text-decoration: none;
 }
