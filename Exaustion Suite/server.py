@@ -2,9 +2,7 @@ import json
 from flask import Flask, request, abort
 from flask.templating import render_template
 from flask import Flask, request
-from kucoin.client import Market
-from kucoin.client import Trade
-from kucoin.client import User
+from kucoin.client import Market, Trade, User
 
 app = Flask(__name__)
 
@@ -14,7 +12,7 @@ app = Flask(__name__)
 def welcome():
     return "welcome"
 
-@app.route('/', methods=['POST'])
+@app.route('/webhook', methods=['POST'])
 def webhook():
 
     # loads the requests data in json format
