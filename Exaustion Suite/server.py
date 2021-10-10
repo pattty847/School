@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def welcome():
-    return "welcome"
+    return render_template('index.html')
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
