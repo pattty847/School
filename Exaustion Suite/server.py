@@ -8,9 +8,13 @@ app = Flask(__name__)
 
 # change
 
-@app.route('/')
+@app.route('/index.html')
 def welcome():
-    return render_template('index.html')
+    return render_template("index.html")
+
+@app.route('/crypto.html')
+def crypto():
+    return render_template("crypto.html")
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -29,7 +33,7 @@ def webhook():
 # USDT ID: 61619d9942702600065eeb6d
 api_key = "6161393bbc85c200065b0ca5"
 api_secret = "bbe915da-6589-4187-92f5-a506de4b084b"
-api_passphrase = "Apollo420$"
+api_passphrase = ""
 
 client = Trade(api_key, api_secret, api_passphrase, is_sandbox=True)
 user = User(api_key, api_secret, api_passphrase, is_sandbox=True)
@@ -45,10 +49,13 @@ def limit_order(symbol, side, size, price):
     return order
 
 def read_alert(data):
+    price = int(float(data['price']))
     if(data['type'] == "market"):
         order = client.create_market_order(symbol=data['symbol'], side=data['side'], size=data['size'])
     elif(data['type'] == "limit"):
-        order = client.create_limit_order(symbol=data['symbol'], side=data['side'], size=data['size'], price=data['price'])
+        order = client.create_limit_order(symbol=data['symbol'], side=data['side'], size=data['size'], price=str(price))
+    elif(data['type'] == "cancel"):
+        order = client.cancel_all_orders()
     else:
         order = "Incorrect 'type' format. Please use 'market' or 'limit'."
     return client.get_order_details(order['orderId'])

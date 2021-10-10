@@ -1,0 +1,56 @@
+#crypto {
+    background-color: rgb(13, 14, 15);
+    font-family: Anton;
+}
+
+#title {
+    color: rgb(235, 235, 235);
+    text-align: center;
+}
+
+#display {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.images {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    text-align: left;
+}
+
+.become-a-better-trader {
+    color: aliceblue;
+    font-size: 25px;
+}
+
+.description {
+    color: antiquewhite;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-nav {
+    text-align: center;
+    font-size: 30px;
+}
+
+.nav ul {
+    margin: 0;
+}
+
+.nav li {
+    display: inline;
+}
+
+.nav a:hover {
+    background-color: rgba(245, 245, 220, .3);
+}
+
+.nav a {
+    display: inline-block;
+    font-size: 25px;
+    color: antiquewhite;
+    padding: .5em;
+    text-decoration: none;
+}
