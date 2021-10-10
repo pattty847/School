@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # change
 
-@app.route('/index.html')
+@app.route('/')
 def welcome():
     return render_template("index.html")
 
