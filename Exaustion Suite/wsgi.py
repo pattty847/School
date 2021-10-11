@@ -3,9 +3,14 @@ from flask import Flask, request, abort
 from flask.templating import render_template
 from flask import Flask, request, redirect, url_for
 from kucoin.client import Market, Trade, User
+from pycoingecko import CoinGeckoAPI
+from pprint import pprint
 
 # Initialize our Flask application server
 app = Flask(__name__)
+
+# Initialize our CoinGeckoAPI
+cg = CoinGeckoAPI()
 
 # route() is a decorator which binds functions to URLs
 # /index is the home page for the website
@@ -99,7 +104,25 @@ def read_alert(data):
 
     return order
     
+def getTrendingCoins():
+    return cg.get_search_trending()
 
+def getCategories():
+    return cg.get_coins_categories()
+
+def coinLookup(name):
+    return cg.get_coin_by_id(name, vs_currencies='usd')
 
 if __name__ == "__main__":
-    app.run()
+    trending = getTrendingCoins()
+    for coin in trending['coins']:
+        pass
+        # print(coin['item']['id'])
+
+    categories = getCategories()
+    for name in categories:
+        pass
+        # print(name['name'])
+
+
+    print(coinLookup('bitcoin')['description'])
