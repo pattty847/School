@@ -1,3 +1,3 @@
-api_key = "6162fd36bc85c200065b10ea"
-api_secret = "5815f4e7-d387-455a-8edb-d5b0a36320c0"
-api_passphrase = "61619d9942702600065eeb6d"
+api_key = "6164db1f180aa0000118a54b"
+api_secret = "b8159305-8147-470e-b3a8-5e61cbfdb2e1"
+api_passphrase = "345239457983452"

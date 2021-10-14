@@ -53,8 +53,8 @@ api_key = config.api_key
 api_secret = config.api_secret
 api_passphrase = config.api_passphrase
 
-client = Trade(api_key, api_secret, api_passphrase, is_sandbox=True)
-user = User(api_key, api_secret, api_passphrase, is_sandbox=True)
+client = Trade(api_key, api_secret, api_passphrase)
+user = User(api_key, api_secret, api_passphrase)
 
 # Stores the information in USDT wallet
 balance = user.get_account("61619d9942702600065eeb6d")
@@ -114,15 +114,5 @@ def coinLookup(name):
     return cg.get_coin_by_id(name, vs_currencies='usd')
 
 if __name__ == "__main__":
-    trending = getTrendingCoins()
-    for coin in trending['coins']:
-        pass
-        # print(coin['item']['id'])
-
-    categories = getCategories()
-    for name in categories:
-        pass
-        # print(name['name'])
-
-
-    print(coinLookup('bitcoin')['description'])
+    app.run()
+    
