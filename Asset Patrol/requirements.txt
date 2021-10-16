@@ -1,0 +1,5 @@
+numpy
+pandas
+dearpygui
+pycoingecko
+pandas
