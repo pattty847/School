@@ -14,7 +14,8 @@ df = pd.DataFrame(btc)
 df.rename(columns={0: 'unix', 1: 'open', 2: 'high', 3: 'low', 4: 'close'}, inplace=True)  
 df['date'] = pd.to_datetime(df['unix'], unit='ms')
 coins = []
-portfolio = pd.DataFrame(columns=['Coins', 'Shares', 'Purchase Price', 'Initial Investment'])
+shares = []
+portfolio = pd.DataFrame(columns=['Coins', 'Shares', 'Purchase Price', 'Initial Investment', 'Value'])
 
 # Main program viewport
 vp = dpg.create_viewport(title='TradeSuite', width=1600, height=1200)
@@ -80,6 +81,7 @@ def draw_candleplot():
 
             dpg.add_candle_series(dates=dates, opens=opens, highs=highs, lows=lows, closes=closes, label="Candlesticks", parent="plot")
 
+
 def load_portfolio():
     with dpg.window(id = 'portfolio', label='Portfolio', width=800, height=800, no_resize=True):
         # create plot
@@ -94,24 +96,60 @@ def load_portfolio():
 
             dpg.add_pie_series(x=10.0, y=40.0, radius=50.0, values=['itemdsas', 'dsfasd', 'sfsadfa'], labels=['fdsa', 'sdfas', 'fdsafs'], parent=dpg.last_item())
 
-def add_coin():
-    if(dpg.get_value('crypto-index') == "" or cg.get_price(dpg.get_value('crypto-index'), vs_currencies='usd') == {}): return print("Error finding coin.")
-
-    coins.append(dpg.get_value('crypto-index'))
-    print('added')
-
-def create_portfolio():
-    portfolio['Coins'] = coins
-    for each in portfolio['Coins']:
-        print(each)
-    return portfolio
-
+# Callback/Window - This window will allow users to build a portfolio index that averages the total price of all coins * shares: coins * shares / coins.length
 def create_index():
+
     with dpg.window(id='create-index', label='Create Index', width=800, height=800, no_resize=True):
         # input text box where we grab a cryptocurrency from the user
-        dpg.add_input_text(id="crypto-index", label='Enter a Crypto')
+        dpg.add_input_text(id="crypto-index", label='Enter a Crypto', width=100)
+        dpg.add_input_text(id="crypto-shares", label='# of Shares', width=100)
+        dpg.add_same_line()
         dpg.add_button(label="Add Coin", callback=add_coin)
+        dpg.add_same_line()
         dpg.add_button(label="Done", callback=create_portfolio)
+        dpg.add_text(id='crypto-index-results-field')
+
+
+# Callback/Function - this adds the list of coins to portfolio DataFrame after the user is done entering them
+def create_portfolio():
+
+    portfolio['Coins'] = coins
+    portfolio['Shares'] = shares
+
+
+    with dpg.window(id='loaded-portfolio', label='Portfolio Name', width=800, height=800, no_resize=True):
+
+        with dpg.table(header_row=True, parent='candlestick-chart'):
+
+            # use add_table_column to add columns to the table,
+            # table columns use child slot 0
+            for column in portfolio.columns:
+                dpg.add_table_column(label = column)
+
+            for i in range(0, portfolio.shape[0]):
+                for j in range(0, portfolio.shape[1]):
+                    dpg.add_text(portfolio.iloc[i, j])
+
+                    # call if not last cell
+                    if not (i == portfolio.shape[0] and j == portfolio.shape[1]):
+                        dpg.add_table_next_column()
+
+
+# Callback/Function - checks if the text area is blank or if the coin cannot be found, then adds it to the 'coins' list
+def add_coin():
+
+    if(dpg.get_value('crypto-index') == "" or dpg.get_value('crypto-shares') == "" or cg.get_price(dpg.get_value('crypto-index'), vs_currencies='usd') == {}): return print("Error finding coin.")
+    shares_value = dpg.get_value("crypto-shares")
+    try:
+        int(shares_value)
+    except ValueError as e:
+        print(e + "Use a # for 'shares'")
+
+    dpg.set_value('crypto-index-results-field', dpg.get_value('crypto-index'))
+    coins.append(dpg.get_value('crypto-index'))
+    shares.append(shares_value)
+    
+
 
 # TradeSuite homepage which is called after the __main__ python function runs
 def start_viewport():
