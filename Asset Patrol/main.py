@@ -15,6 +15,7 @@ df.rename(columns={0: 'unix', 1: 'open', 2: 'high', 3: 'low', 4: 'close'}, inpla
 df['date'] = pd.to_datetime(df['unix'], unit='ms')
 coins = []
 shares = []
+test = {}
 portfolio = pd.DataFrame(columns=['Coins', 'Shares', 'Purchase Price', 'Initial Investment', 'Value'])
 
 # Main program viewport
@@ -144,6 +145,11 @@ def add_coin():
         int(shares_value)
     except ValueError as e:
         print(e + "Use a # for 'shares'")
+
+    price = cg.get_price(dpg.get_value('crypto-index'), vs_currencies='usd')
+    test[dpg.get_value('crypto-index')] = shares
+    test["value"] = price[dpg.get_value('crypto-index')]['usd'] * shares
+    print(test)
 
     dpg.set_value('crypto-index-results-field', dpg.get_value('crypto-index'))
     coins.append(dpg.get_value('crypto-index'))
