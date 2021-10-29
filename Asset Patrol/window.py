@@ -8,6 +8,47 @@ import pandas as pd
 from datetime import datetime
 
 
+class Window():
+    def __init__(self):
+        self.WIDTH = 1600
+        self.HEIGHT = 800
+
+        self.title = 'TradeSuite'
+
+        self.init_window()
+
+
+    def init_window(self):
+        with dpg.window(id='main', label='TradeSuite', width=self.WIDTH, height=self.HEIGHT):
+            dpg.add_text('dsafasdfsadfasdfasd')
+
+        dpg.set_primary_window('main', True)
+        dpg.start_dearpygui()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 cg = CoinGeckoAPI()
 btc = cg.get_coin_ohlc_by_id('bitcoin', vs_currency='usd', days=90)
 df = pd.DataFrame(btc)
@@ -63,16 +104,3 @@ def start_viewport():
         # input text box where we grab a cryptocurrency from the user
         dpg.add_input_text(id="input", label='Enter a Crypto')
         dpg.add_button(label="Search Coin Price")
-
-
-if(__name__ == "__main__"):
-    start_viewport()
-    dpg.show_viewport(vp)
-    dpg.set_primary_window('main-viewport', True)
-    # dpg.show_implot_demo()
-    # dpg.show_imgui_demo()
-    # below replaces, start_dearpygui()
-    while dpg.is_dearpygui_running():
-        # insert here any code you would like to run in the render loop
-        # you can manually stop by using stop_dearpygui()
-        dpg.render_dearpygui_frame()
