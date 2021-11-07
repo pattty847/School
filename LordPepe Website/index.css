@@ -2,14 +2,7 @@
     background: linear-gradient(100deg, #99fd67, #4fd6ff, #86ff4a, #1d9e00);
     background-size: 400%;
     animation: gradient 4s ease infinite;
-}
-
-#title {
     font-family: Anton;
-    font-size: 62px;
-    text-align: center;
-    margin: 0;
-    padding: 0;
 }
 
 #links {
@@ -29,4 +22,62 @@
 .button:hover {
     opacity: .8;
     cursor: pointer;
+}
+
+
+/* 
+This is the main section for the content of the page
+*/
+
+#display {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.images {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    text-align: left;
+}
+
+.become-a-better-trader {
+    color: rgb(24, 24, 24);
+    font-size: 25px;
+}
+
+.description {
+    color: rgb(29, 29, 29);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-nav {
+    text-align: center;
+    font-size: 30px;
+    word-spacing: 20px;
+    text-decoration: none;
+}
+
+.nav ul {
+    margin: 0;
+}
+
+.nav li {
+    display: inline;
+}
+
+.nav a {
+    text-decoration: none;
+}
+
+.nav a:hover {
+    background-color: rgba(165, 165, 165, 0.3);
+}
+
+.nav button {
+    display: inline-block;
+    font-size: 25px;
+    color: antiquewhite;
+    padding: .5em;
+    text-decoration: none;
 }
