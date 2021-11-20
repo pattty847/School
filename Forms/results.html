@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="results"></div>
+    <script>
+        /* Store the 'results' div to append the name and value to */
+        const resultsForm = document.getElementById('results')
+
+        /* 
+            Function that iterates through values contained within this object via callback function
+            then appends 'name' and 'value' to div
+        */
+        new URLSearchParams(window.location.search).forEach((value, name) => {
+            resultsForm.append(`${name}: ${value}`)
+            resultsForm.append(document.createElement("br"))
+        })
+    </script>
+</body>
+
+</html>
