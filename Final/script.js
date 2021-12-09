@@ -14,7 +14,7 @@ let coins = {
 };
 
 function updateValues() {
-    coins['btc-price'].innerHTML = coin;
+    coins['btc-price'].innerHTML = func().coin
     coins['btc-change'].innerHTML = "1.4%";
 }
 
