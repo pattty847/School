@@ -32,5 +32,4 @@ OHLCChart = go.Figure(data=go.Ohlc(x=harmonyOHLC['DATE'],
                     low=harmonyOHLC['LOW'],
                     close=harmonyOHLC['CLOSE']))
 
-OHLCChart.show()
-print(harmonyOHLC.head())
+# print(harmonyOHLC.head())

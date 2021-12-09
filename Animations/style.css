@@ -1,6 +1,5 @@
 body {
     background-color: black;
-    color: white;
 }
 
 .grid {
@@ -21,4 +20,83 @@ body {
 #main:hover {
     height: 500px;
     width: 500px;
+}
+
+.content-page {
+    margin-left: 0!important;
+    padding: 65 px 10 px 65 px;
+}
+
+.content-page {
+    margin-left: 260 px;
+    overflow: hidden;
+    padding: 70 px 12 px 65 px;
+    min-height: 100 vh;
+}
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -12 px;
+    margin-left: -12 px;
+}
+
+.col-md-3 {
+    position: relative;
+    width: 100%;
+    padding-right: 12 px;
+    padding-left: 12 px;
+}
+
+.card {
+    border: none;
+    -webkit-box-shadow: 0 0 35px 0 rgb(154 161 171 / 15%);
+    box-shadow: 0 0 35px 0 rgb(154 161 171 / 15%);
+    margin-bottom: 24 px;
+}
+
+.text-white {
+    color: #fff!important;
+}
+
+.bg-danger {
+    background-color: #ff5b5b!important;
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: rgb(47, 199, 47);
+    background-clip: border-box;
+    border: 1px solid #eef2f7;
+    border-radius: .25rem;
+}
+
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.5rem;
+}
+
+.mb-3,
+.my-3 {
+    margin-bottom: 1.5rem!important;
+}
+
+.mb-1,
+.my-1 {
+    margin-bottom: .375rem!important;
 }
