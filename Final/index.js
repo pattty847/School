@@ -24,7 +24,7 @@ function createCard(card) {
     // From here on out we will create a row and insert a cell in that row
     var headerRow = header.insertRow(0);
     var headerCell = headerRow.insertCell(0);
-    // In this line we will push an empty value that will later be updated
+    // In this line we will update the cells value with the "card" object's title variable
     headerCell.innerHTML = card["title"];
 
 
@@ -32,6 +32,7 @@ function createCard(card) {
     var priceCell = priceRow.insertCell(0);
     priceCell.innerHTML = "Price";
 
+    // This will create a second column in the same row when we use .insertCell(-1)
     var priceCellColumn2 = priceRow.insertCell(-1);
     priceCellColumn2.innerHTML = card["price"];
 
@@ -65,6 +66,7 @@ function createCard(card) {
     console.log(watchlist);
 }
 
+
 // This function will be called when the 'Add Coin' button is clicked and will append an input element to 'add-coin-input'.
 function createAddCoinForm() {
     // First we check if there is already an input box in the 'add-coin-input' div.
@@ -75,10 +77,13 @@ function createAddCoinForm() {
     }
 }
 
+
 // This function will be called when the 'Push to Watchlist' button is clicked and will create a card object that is passed to 
 // createCard() function. It will use other functions to obtain price data.
 function createCardObject() {
     var input = document.getElementById('input').value;
+
+    // UPDATE: add CoinGecko implimentation to obtain this data
     var card = {
         title: input,
         price: 123,
@@ -90,4 +95,10 @@ function createCardObject() {
     watchlist.push(card);
     // This is where I need to impliment CoinGecko Api and get initial coin data.
     createCard(card);
+}
+
+
+// This function will update the price data for all coins in the watchlist every x seconds
+function updatePrices(watchList, loopSeconds) {
+
 }

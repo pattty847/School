@@ -1,3 +1,4 @@
+from bs4.builder import HTMLTreeBuilder
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
@@ -34,21 +35,12 @@ def download(url, pathname):
             # update the progress bar manually
             progress.update(len(data))
 
-for image in soup.find_all("a"):
-    imgURL = image['href']
-    print("1:" + imgURL)
-    newPage = requests.get(imgURL)
-    newSoup = BeautifulSoup(newPage.content, 'html.parser')
-    for newImage in newSoup.findAll("img"):
-        pepeURL = newImage['src']
-        print(pepeURL)
-        #download(pepeURL, "userpepes")
-    #print(imgURL)
-    # wget.download(imgURL)
-
-
-# We want to take our soup object and loop throught to find our 'div' with the id='gallery-1', then find the 'a' tag 
-# and it's 'href' attribute, open that soup and find the 'img' tag with 'src' attribute and download. 
-
-# with open("pepe.html", "w") as f:
-#     f.write(str(soup))
+for image in soup.find_all("figure", class_='gallery-item'):
+    divElement = image.find_next()
+    aElement = divElement.find_next()
+    link = aElement['href']
+    nextPage = requests.get(link)
+    newSoup = BeautifulSoup(nextPage.content, 'html.parser')
+    for pepe in newSoup.find_all('img', class_='aligncenter'):
+        imageLink = pepe['src']
+        download(imageLink, 'images')
