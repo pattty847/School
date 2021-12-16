@@ -1,0 +1,11 @@
+body {
+    color: white;
+    background-color: black;
+}
+
+canvas {
+    background-color: aliceblue;
+    width: 1200px;
+    height: 1200px;
+    position: absolute;
+}

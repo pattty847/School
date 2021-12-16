@@ -35,12 +35,20 @@ def download(url, pathname):
             # update the progress bar manually
             progress.update(len(data))
 
+
+# Load the figure elements with class 'gallery-item'
 for image in soup.find_all("figure", class_='gallery-item'):
+    # Grab next element
     divElement = image.find_next()
+    # Grab next element
     aElement = divElement.find_next()
+    # Find href image element
     link = aElement['href']
+    # Open new BeautifulSoup
     nextPage = requests.get(link)
     newSoup = BeautifulSoup(nextPage.content, 'html.parser')
+    #Find image with class 'aligncenter'
     for pepe in newSoup.find_all('img', class_='aligncenter'):
         imageLink = pepe['src']
+        # Download image
         download(imageLink, 'images')
