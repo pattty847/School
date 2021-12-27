@@ -53,11 +53,11 @@ api_key = config.api_key
 api_secret = config.api_secret
 api_passphrase = config.api_passphrase
 
-client = Trade(api_key, api_secret, api_passphrase)
-user = User(api_key, api_secret, api_passphrase)
+client = Trade(api_key, api_secret, api_passphrase, is_sandbox=False)
+user = User(api_key, api_secret, api_passphrase, is_sandbox=False)
 
 # Stores the information in USDT wallet
-balance = user.get_account("61619d9942702600065eeb6d")
+balance = user.get_account_list(currency='BTC', account_type='trade')
 
 # This list will store all of our previous orders so we can refer to them later
 orders_list = []
@@ -114,5 +114,5 @@ def coinLookup(name):
     return cg.get_coin_by_id(name, vs_currencies='usd')
 
 if __name__ == "__main__":
-    app.run()
+    pprint(balance)
     

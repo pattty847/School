@@ -1,16 +1,10 @@
 class coin:
-
-
-
-    def __init__(self, coin):
+    def __init__(self, coin, data):
         self.coin = coin
-        self.headers = ['Trend', '5 min', '15 min' '1 hour', '2 hour', '4 hour', '6 hour', '1 day']
-        self.sma = {10:[], 15:[], '1h':[], '2h':[], '4h':[], '6h':[], '1d':[]}
-        self.ema = {10:[], 15:[], '1h':[], '2h':[], '4h':[], '6h':[], '1d':[]}
-        
+        self.data = data
 
-    def setSMA(list):
-        pass
+    def printStats(self):
+        print(self.stats)
 
 
     def setEMA(list):

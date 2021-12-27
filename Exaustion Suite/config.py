@@ -1,3 +1,3 @@
-api_key = "6164db1f180aa0000118a54b"
-api_secret = "b8159305-8147-470e-b3a8-5e61cbfdb2e1"
-api_passphrase = "345239457983452"
+api_key = "61c86846ef0dc60001ad5748"
+api_secret = "a2250828-2a0d-4602-80ad-683041f6aee0"
+api_passphrase = "Apollo420$"

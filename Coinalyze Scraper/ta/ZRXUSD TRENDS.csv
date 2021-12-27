@@ -1,0 +1,21 @@
+Trend,5 min,15 min,1 hour,2 hour,4 hour,6 hour,1 day
+Simple Moving Average (10),0.83 0.47% ⋀,0.83 0.40% ⋀,0.83 0.48% ⋀,0.83 0.67% ⋀,0.82 2.51% ⋀,0.80 4.99% ⋀,0.79 6.37% ⋀
+Exponential Moving Average (10),0.83 0.45% ⋀,0.83 0.55% ⋀,0.83 0.61% ⋀,0.83 1.12% ⋀,0.82 2.37% ⋀,0.81 3.84% ⋀,0.81 3.73% ⋀
+Simple Moving Average (20),0.83 0.69% ⋀,0.83 0.99% ⋀,0.83 0.89% ⋀,0.81 3.25% ⋀,0.79 6.39% ⋀,0.78 6.63% ⋀,0.82 2.18% ⋀
+Exponential Moving Average (20),0.83 0.56% ⋀,0.83 0.65% ⋀,0.83 1.31% ⋀,0.81 2.79% ⋀,0.80 4.40% ⋀,0.79 5.42% ⋀,0.85 -1.76% ⋁
+Simple Moving Average (30),0.83 0.43% ⋀,0.83 0.72% ⋀,0.82 2.11% ⋀,0.79 5.26% ⋀,0.79 6.51% ⋀,0.78 6.68% ⋀,0.93 -10.09% ⋁
+Exponential Moving Average (30),0.83 0.62% ⋀,0.83 0.68% ⋀,0.82 2.20% ⋀,0.80 4.01% ⋀,0.80 5.24% ⋀,0.79 5.43% ⋀,0.90 -6.88% ⋁
+Simple Moving Average (50),0.83 0.95% ⋀,0.83 0.38% ⋀,0.80 4.47% ⋀,0.78 6.83% ⋀,0.78 6.97% ⋀,0.79 6.03% ⋀,1.04 -19.44% ⋁
+Exponential Moving Average (50),0.83 0.69% ⋀,0.83 0.87% ⋀,0.81 3.68% ⋀,0.79 5.29% ⋀,0.80 4.99% ⋀,0.81 3.21% ⋀,0.96 -12.47% ⋁
+Simple Moving Average (100),0.83 0.62% ⋀,0.82 1.52% ⋀,0.78 6.85% ⋀,0.78 7.11% ⋀,0.81 3.04% ⋀,0.89 -6.17% ⋁,1.03 -18.60% ⋁
+Exponential Moving Average (100),0.83 0.77% ⋀,0.82 1.89% ⋀,0.79 5.50% ⋀,0.79 5.32% ⋀,0.84 -0.02% ⋁,0.88 -5.20% ⋁,0.98 -14.89% ⋁
+Simple Moving Average (200),0.83 0.84% ⋀,0.80 4.64% ⋀,0.78 7.13% ⋀,0.81 3.04% ⋀,0.95 -12.11% ⋁,1.04 -19.70% ⋁,0.95 -11.99% ⋁
+Exponential Moving Average (200),0.83 1.19% ⋀,0.80 4.20% ⋀,0.79 5.90% ⋀,0.84 -0.92% ⋁,0.93 -10.33% ⋁,0.95 -12.38% ⋁,1.09 -23.02% ⋁
+Summary,Up: 12 Down: 0 Neutral: 0,Up: 12 Down: 0 Neutral: 0,Up: 12 Down: 0 Neutral: 0,Up: 11 Down: 1 Neutral: 0,Up: 9 Down: 3 Neutral: 0,Up: 8 Down: 4 Neutral: 0,Up: 3 Down: 9 Neutral: 0
+Overbought / Oversold,5 min,15 min,1 hour,2 hour,4 hour,6 hour,1 day
+Relative Strength Index (14),62.29NE,57.02NE,61.19NE,68.95NE,67.65NE,63.92NE,44.55NE
+"Stochastic K (14,3,3)",91.40OB,73.97NE,53.89NE,71.88NE,79.62NE,83.17OB,48.41NE
+Commodity Channel Index (20),107.81OB,81.83NE,54.57NE,77.47NE,109.44OB,152.65OB,19.60NE
+Williams %R (14),0.00OB,-16.83OB,-40.78NE,-27.25NE,-16.63OB,-13.74OB,-28.84NE
+"Bollinger Bands Upper / Lower (20,2,2)",0.840.82NE,0.840.82NE,0.850.81NE,0.860.76NE,0.860.72NE,0.840.73NE,0.920.72NE
+Summary,OB: 3 OS: 0 NE: 2,OB: 1 OS: 0 NE: 4,OB: 0 OS: 0 NE: 5,OB: 0 OS: 0 NE: 5,OB: 2 OS: 0 NE: 3,OB: 3 OS: 0 NE: 2,OB: 0 OS: 0 NE: 5

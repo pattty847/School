@@ -1,19 +1,28 @@
 from os import remove, stat
 from requests.api import head
+from coin import coin
 import pepe
 import requests
 from bs4 import BeautifulSoup, element
+import pandas as pd
 import json
-
+import lxml
+import os
 
 pepe = pepe
-URL = "https://coinalyze.net"
-page = requests.get(URL)
 
-soup = BeautifulSoup(page.content, 'html.parser')
+# This contains all pairs in list format
+allCoinPairs = []
 
+# This contains all coins, stats, and trend stats in list of DataFrame objects
+coinObjects = []
 
-def loadTALinks():
+# This function will grab all of the 'technical analysis' links for all coins on the front page
+def getNewTaData():
+    URL = "https://coinalyze.net"
+    page = requests.get(URL)
+
+    soup = BeautifulSoup(page.content, 'html.parser')
     # Load the figure elements with class 'gallery-item'
     getCoinsDiv = soup.find_all("div", class_='coins')
     allCoinsURL = []
@@ -22,97 +31,94 @@ def loadTALinks():
         for a in links:
             l = URL + a["href"]
             allCoinsURL.append(l)
-    pullTAData(allCoinsURL)
+    getTAData(allCoinsURL)
 
-trendTablesAllLinks = []
+
 # This function will take a list of every link on the home page, open it, and extract all the TA information.
-def pullTAData(link):
-    # We loop through the links
-    for statTable in link:
-        if statTable != 'https://coinalyze.net/funfair/technical-analysis/':
+def getTAData(link):
+    for l in link:
+        if(l != 'https://coinalyze.net/funfair/technical-analysis/'):
+            # We loop through the links
             # Create a new request
-            r = requests.get(statTable)
+            r = requests.get(l)
             # New beautifulsoup
             taSoup = BeautifulSoup(r.content, 'html.parser')
             # with open('ta.txt', 'w') as my_data_file:
             # This contains the data in the "stats" category/class
             data = taSoup.find('div', class_='stats')
             # This will grab all of the coins data
-            headers = data.findNext('td').contents[0]
-            product = data.findNext('td').contents[0] # we will ignore this data
+            product = data.findNext('td').contents[0]
             price = product.findNext('td')
-            statsHeaders = ['Stats', '1 Hour', '24 Hours', '7 Days', '30 Days']
             statsData = price.findNext('table')
-            # changesTitles = statsData.find_next() # ignoring
-            # changesData = changesTitles.find_next_siblings('tr')[0]
-            # highsData = changesTitles.find_next_siblings('tr')[1]
-            # lowsData = changesTitles.find_next_siblings('tr')[2]
-            # trendHeaders = ['Trend', '5 min', '15 min' '1 hour', '2 hour', '4 hour', '6 hour', '1 day']
+
             trendTable = statsData.findNext('table')
-            # trendTable = str(trendTable.text).strip()
-
-            # Data clean up section
-            headers = str(headers.text.replace("/", "-"))
-            headers = headers.replace("Current", "").strip() # Headers after removing the "/" and "Current"
-            price = str(price.text.lstrip())
-            statsData = removeEmptyStrings(statsData.text.lstrip().splitlines())
-            trendTable = removeEmptyStrings(trendTable.text.lstrip().splitlines()) # function to remove empty strings in the list
-            statsTableHeaders = statsData[0:5] # grabbing the "stats" strings in the list
-            statsTableChange = statsData[5:10] # grabbing the "change" strings in the list
-            statsTableHigh = statsData[10:15] # grabbing the "high" strings in the list
-            statsTableLow = statsData[15:20] # grabbing the "low" strings in the list
-            strippedTrendTable = []
-            for x in trendTable:
-                strippedTrendTable.append(x.strip())
-            trendTableSMA10 = strippedTrendTable[9:30]
-            trendTableEMA10 = strippedTrendTable[31:52]
-            trendTableSMA20 = strippedTrendTable[52:74]
-            trendTableEMA20 = strippedTrendTable[74:96]
-            trendTableSMA30 = strippedTrendTable[96:118]
-            trendTableEMA30 = strippedTrendTable[118:140]
-            trendTableSMA50 = strippedTrendTable[140:162]
-            trendTableEMA50 = strippedTrendTable[162:184]
-            trendTableSMA100 = strippedTrendTable[184:206]
-            print(trendTableEMA50)
-            # d = json.dumps(fullCoinStats)
-            # trendTablesAllLinks.append(fullCoinStats)
-            # with open(product + '.json', 'w') as f:
-                # json.dump(d, f)
+            statsDF = pd.read_html(str(statsData))[0]
+            trendDF = pd.read_html(str(trendTable))[0]
+            product = str(product.text.replace('Current ', ''))
+            product = product.replace(' / ', '')
+            allCoinPairs.append(product)
+            cwd = os.getcwd()
+            path = cwd + "/TA/"
+            statsDF.to_csv(path+product + " STATS.csv", index=False, header=False)
+            trendDF.to_csv(path+product + " TRENDS.csv", index=False, header=False)
 
 
-def removeEmptyStrings(l):
-    return list(filter(None, l))
+def getNewFuturesData():
+    URL = "https://coinalyze.net/futures-data/coins/"
+    page = requests.get(URL)
 
-def saveToFile():
-    trendTablesAllLinksJSON = json.dumps(trendTablesAllLinks)
-    with open('ta.json', 'w') as f:
-        json.dump(trendTablesAllLinksJSON, f)
+    soup = BeautifulSoup(page.content, 'html.parser')
+        
+    table_wrapper = soup.find('div', class_='table-wrapper')
+    table = table_wrapper.findNext('table')
+    futuresDF = pd.read_html(str(table))[0]
+    futuresDF = futuresDF.drop(columns=["Unnamed: 0"])
+    print(futuresDF)
+
+
+
+# This function will load all coins from the file below, loop through, and create a dictionary of the {name:dataframe} from the 
+# associated file in the 'ta' folder
+def importCoins():
+    cwd = os.getcwd()
+    path = cwd + "/TA/"
+    ta_files = os.listdir(path=path)
+    for f in ta_files:
+        # need to check for f being 'TREND' file or 'STAT' file before proceeding
+        if(f.endswith("TRENDS.csv")):
+            coin = f.split(' ')[0]
+            coin_obj = {coin : pd.read_csv(path + f)}
+            coinObjects.append(coin_obj)
+            
+# After loading the 'csv' files you can call these 'summary' functions + the coin name to lookup its stats
+def getTrendSummary(df, coin):
+    for each in df:
+        for key in each.keys():
+            if(key == coin):
+                # print(each[key].loc[12])
+                z = each[key].loc[12]
+                print(z)
+
+
+def getSummary(df, coin):
+    for each in df:
+        for key in each.keys():
+            if(key == coin):
+                # print(each[key].loc[12])
+                z = each[key]
+                print(z)
+
+def getSummaryAllCoins(df):
+    for each in df:
+        print(df[each])
+
 
 def start():
-    loadTALinks()
-
-
+    getNewTaData(coin='BTCUSD')
+    importCoins()
+    getTrendSummary(coinObjects, "BTCUSD")
+    #getSummary(coinObjects, "BTCUSD")
+    #getNewFuturesData()
+    
+        
 start()
-
-
-"""
-[<tr>
-<td>Change %</td>
-<td class="green">0.46%</td>
-<td class="green">2.67%</td>
-<td class="red">-4.54%</td>
-<td class="red">-26.22%</td>
-</tr>, <tr>
-<td>High</td>
-<td>48,449.35</td>
-<td>48,795.00</td>
-<td>51,250.00</td>
-<td>66,339.90</td>
-</tr>, <tr>
-<td>Low</td>
-<td>48,077.60</td>
-<td>46,344.93</td>
-<td>45,727.92</td>
-<td>42,333.00</td>
-</tr>]
-"""
