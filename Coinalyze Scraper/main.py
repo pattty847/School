@@ -8,7 +8,6 @@ import pandas as pd
 import json
 import lxml
 import os
-
 pepe = pepe
 
 # This contains all pairs in list format
@@ -114,11 +113,11 @@ def getSummaryAllCoins(df):
 
 
 def start():
-    getNewTaData(coin='BTCUSD')
-    importCoins()
-    getTrendSummary(coinObjects, "BTCUSD")
+    #getNewTaData(coin='BTCUSD')
+    #importCoins()
+    #getTrendSummary(coinObjects, "BTCUSD")
     #getSummary(coinObjects, "BTCUSD")
     #getNewFuturesData()
+
     
-        
-start()
+    pass
