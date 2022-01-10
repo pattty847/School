@@ -86,10 +86,10 @@ def calculateWaveTrend(coin, timeframe, chlen, avg, malen, oslevel, oblevel, his
     tfSrc['wtCrossDownlast'] = tfSrc['wt2'][2] - tfSrc['wt1'][2] >= 0
 
     # Buy signal.
-    tfSrc['Buy'] = tfSrc['wtCross'].all() and tfSrc['wtCrossUp'].all() and tfSrc['wtOversold'].all()
+    tfSrc['Buy'] = tfSrc['wtCross'] & tfSrc['wtCrossUp'] & tfSrc['wtOversold']
 
     # Sell signal
-    tfSrc['Sell'] = tfSrc['wtCross'].all() and tfSrc['wtCrossDown'].all() and tfSrc['wtOverbought'].all()
+    tfSrc['Sell'] = tfSrc['wtCross'] & tfSrc['wtCrossDown'] & tfSrc['wtOverbought']
 
     # return the last minute
     return tfSrc if history else tfSrc[-1:]
@@ -116,9 +116,10 @@ if __name__ == "__main__":
     currency = 'USDT'
     pair = coin+'/'+currency
     timeframe = '1m'
-    trade_ratio_to_balance = '.1' # 10% of account balance to be used / trade
+    trade_ratio_to_balance = .3 # 30% of account balance to be used / trade in the underlying currency
 
     waveTrend = calculateWaveTrend(pair, timeframe,  9, 12, 3, -53, 53, True)
     lastMinuteWT = calculateWaveTrend(pair, timeframe,  9, 12, 3, -53, 53, False)
 
-    checkForTrade(lastMinuteWT, pair, trade_ratio_to_balance)
+    waveTrend.to_csv('wavetrend.csv')
+    # checkForTrade(waveTrend, pair, trade_ratio_to_balance)
