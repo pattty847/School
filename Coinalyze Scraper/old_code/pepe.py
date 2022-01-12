@@ -1,6 +1,6 @@
 from os import remove, stat
 from requests.api import head
-import pepe
+import old_code.pepe as pepe
 import requests
 from bs4 import BeautifulSoup, element
 import pandas as pd
