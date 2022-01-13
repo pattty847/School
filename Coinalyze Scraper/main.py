@@ -70,10 +70,10 @@ def calculateWaveTrend(coin, timeframe, chlen, avg, malen, oslevel, oblevel, his
     tfSrc['wtCrossDownlast'] = tfSrc['wt2'][2] - tfSrc['wt1'][2] >= 0
 
     # Buy signal.
-    # tfSrc['Buy'] = tfSrc['wtCross'] & tfSrc['wtCrossUp'] & tfSrc['wtOversold']
+    tfSrc['Buy'] = tfSrc['wtCross'] & tfSrc['wtCrossUp'] & tfSrc['wtOversold']
 
     # Sell signal
-    # tfSrc['Sell'] = tfSrc['wtCross'] & tfSrc['wtCrossDown'] & tfSrc['wtOverbought']
+    tfSrc['Sell'] = tfSrc['wtCross'] & tfSrc['wtCrossDown'] & tfSrc['wtOverbought']
 
     # return the last minute
     return tfSrc if history else tfSrc[-1:]
@@ -109,7 +109,7 @@ def plotLastData(df):
 if __name__ == "__main__":
     # calculateWaveTrend(coin, timeframe, chlen, avg, malen, oslevel, oblevel)
 
-    coin = 'XPR'
+    coin = 'BTC'
     currency = 'USDT'
     pair = coin+'/'+currency
     timeframe = '5m'
@@ -121,3 +121,11 @@ if __name__ == "__main__":
     # checkForTrade(waveTrend, pair, trade_ratio_to_balance)
 
     waveTrend.to_csv('wavetrend.csv')
+
+
+
+"""
+4	1.64178E+12	41755.46	41771.32	41643.28	41657.97	137682.6432	41690.85667	41710.85618	16.7419776	-79.63817979	239.965078	285.2657683	-45.30069028	FALSE	TRUE	FALSE	FALSE	TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
+5	1.64178E+12	41664.79	41726.65	41661.51	41723.11	270735.7376	41703.75667	41709.43627	14.52950357	-26.06011251	199.0381256	245.6926549	-46.65452933	FALSE	TRUE	FALSE	FALSE	TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
+6	1.64178E+12	41723.81	41785.75	41723.81	41785.75	198863.8841	41765.10333	41720.56969	20.53033233	144.6108994	    190.6647062	209.8893033	-19.22459707	FALSE	TRUE	FALSE	FALSE	TRUE	FALSE	FALSE	FALSE	FALSE	FALSE
+"""
