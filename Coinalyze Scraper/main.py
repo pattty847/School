@@ -70,39 +70,54 @@ def calculateWaveTrend(coin, timeframe, chlen, avg, malen, oslevel, oblevel, his
     tfSrc['wtCrossDownlast'] = tfSrc['wt2'][2] - tfSrc['wt1'][2] >= 0
 
     # Buy signal.
-    tfSrc['Buy'] = tfSrc['wtCross'].all() and tfSrc['wtCrossUp'].all() and tfSrc['wtOversold'].all()
+    # tfSrc['Buy'] = tfSrc['wtCross'] & tfSrc['wtCrossUp'] & tfSrc['wtOversold']
 
     # Sell signal
-    tfSrc['Sell'] = tfSrc['wtCross'].all() and tfSrc['wtCrossDown'].all() and tfSrc['wtOverbought'].all()
+    # tfSrc['Sell'] = tfSrc['wtCross'] & tfSrc['wtCrossDown'] & tfSrc['wtOverbought']
 
     # return the last minute
     return tfSrc if history else tfSrc[-1:]
 
+def crossing(x, y):
+    if(x > y) and (x[1] < y[1]):
+        return True
+    else:
+        return False
+
+
 def checkForTrade(wt, coin, trade_ratio):
     # This will grab the orderbook for the coin
     orderbook = gate.fetch_order_book(coin)
+    last_close = wt.Close.iloc[-1]
 
     # trade size is the account balance * the trade ratio
     trade_size = gate.fetch_balance()[coin.split('/')[1]]['free'] * trade_ratio
 
-
-    if(wt.Buy.all() == True):
+    pprint(trade_size / last_close)
+    if(wt.Buy.any() == True):
         pass
-        # limit_order_placement =  gate.create_limit_buy_order(coin, '200', '0.013')
+        # limit_order_placement =  gate.create_limit_buy_order(coin, trade_size / last_close, '0.013')
 
-    print(trade_size)
-    pprint(orderbook)
+    #return limit_order_placement
+
+
+def plotLastData(df):
+    df.plot(kind='line', x=df.Time, y=df.Close)
+    plt.show()
+
 
 if __name__ == "__main__":
     # calculateWaveTrend(coin, timeframe, chlen, avg, malen, oslevel, oblevel)
 
-    coin = 'BTC'
+    coin = 'XPR'
     currency = 'USDT'
     pair = coin+'/'+currency
-    timeframe = '1m'
+    timeframe = '5m'
     trade_ratio_to_balance = .3 # 10% of account balance to be used / trade
 
     waveTrend = calculateWaveTrend(pair, timeframe,  9, 12, 3, -53, 53, True)
     lastMinuteWT = calculateWaveTrend(pair, timeframe,  9, 12, 3, -53, 53, False)
+    # plotLastData(waveTrend)
+    # checkForTrade(waveTrend, pair, trade_ratio_to_balance)
 
-    checkForTrade(lastMinuteWT, pair, trade_ratio_to_balance)
+    waveTrend.to_csv('wavetrend.csv')
