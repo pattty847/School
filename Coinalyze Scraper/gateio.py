@@ -1,0 +1,2 @@
+class Gateio(object):
+    pass

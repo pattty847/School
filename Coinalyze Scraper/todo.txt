@@ -1,0 +1,19 @@
+Finished: 
+- WaveTrend works but I need to impliment the divergences and other buy signals
+
+
+Work on: 
+- Learn how to make a base abstract exchange class you can loop though and create connections to
+- Recode the starting point of the program and find out a better way to do it
+- Create a GUI
+- Finish the function that checks each new bar for a signal
+- Maybe take away the pandas column names for the final wavetrend version so it will run faster
+- Make a better method to run the program in a loop every x seconds
+    time.sleep(seconds) works well
+- Check to see if the exchange kicks you again when it calls the history over and over again
+- Function to get Market Price:
+    orderbook = exchange.fetch_order_book (exchange.symbols[0])
+    bid = orderbook['bids'][0][0] if len (orderbook['bids']) > 0 else None
+    ask = orderbook['asks'][0][0] if len (orderbook['asks']) > 0 else None
+    spread = (ask - bid) if (bid and ask) else None
+    print (exchange.id, 'market price', { 'bid': bid, 'ask': ask, 'spread': spread })

@@ -26,3 +26,5 @@ class WaveTrendStrategy(backtest):
         # upstream NaN errors in the forecaster.
         signals['signal'][0:5] = 0.0
         return signals
+    
+    
