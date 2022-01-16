@@ -20,20 +20,28 @@ configFile.read('C:\\Users\\pattt\\Desktop\\exchanges.config')
 #})
 
 def connectExchanges(exchange_list):
+    # final dict with 'exchange': 'exchange_class' key pairs
     results = {}
+    # stores the list of getattr() with api keys available
     xchange_class = []
+    # loop through the passed exchanges list
     for i in exchange_list:
+        # create the getattr()
         exchange_class = getattr(ccxt, i)
+        # check if the key, secret pair is in the config file
         if(i.upper() in configFile):
+            # try to connect to exchange
             exchange = exchange_class({
                 'apiKey': configFile[i.upper()]['apiKey'],
                 'secret': configFile[i.upper()]['secret'],
             })
-            print(type(exchange))
+            # add this new getattr() with the connection
             xchange_class.append(exchange)
         else:
+            # if we don't find it in the config just make a regular connection (no trading)
             xchange_class.append(exchange_class)
 
+    # zip the key value pair
     for key, value in zip(exchange_list, xchange_class):
         results[key] = value
 
@@ -46,7 +54,8 @@ def connectExchanges(exchange_list):
 # This function will calculate the WaveTrend and return them
 def calculateWaveTrend(coin, timeframe, chlen, avg, malen, oslevel, oblevel, history, exchange):
     # Load the data from 'coin' by 'timeframe' (1000 lines 0-999)
-    tfSrc = pd.DataFrame(exchange.fetch_ohlcv(coin, timeframe))
+    # limit will show x bars of history
+    tfSrc = pd.DataFrame(exchange.fetch_ohlcv(coin, timeframe, limit=30))
     tfSrc.rename(columns= {
         0: 'Time', 
         1: 'Open',
@@ -118,7 +127,7 @@ def crossing(x, y):
     wtCross = []
     for i in range(len(x)):
         # check if the value wt1 is greater than wt2 AND less than the previous row OR the opposite for crossing down
-        if(x.iloc[i] >= y.iloc[i] and x.iloc[i-1] <= y.iloc[i-1]) | (x.iloc[i] <= y.iloc[i] and x.iloc[i-1] >= y.iloc[i-1]):
+        if(x.iloc[i] > y.iloc[i] and x.iloc[i-1] < y.iloc[i-1]) | (x.iloc[i] < y.iloc[i] and x.iloc[i-1] > y.iloc[i-1]):
             wtCross.append(True)
         else:
             wtCross.append(False)
@@ -128,6 +137,8 @@ def crossing(x, y):
 def checkForTrade(wt, coin, trade_ratio, exchange):
     # This will grab the orderbook for the coin
     orderbook = exchange.fetch_order_book(coin)
+    coin_balance = exchange.fetch_balance()[coin.split('/')[0]]['free']
+    print(coin_balance)
 
     # this will grab the last close in the 
     last_close = wt.Close.iloc[-1]
@@ -139,7 +150,7 @@ def checkForTrade(wt, coin, trade_ratio, exchange):
     if(wt.Buy.any() == True):
         limit_order_placement =  exchange.create_limit_buy_order(coin, (trade_size / last_close), last_close + 10)
     elif(wt.Sell.any() == True):
-        limit_order_placement =  exchange.create_limit_sell_order(coin, (trade_size / last_close), last_close - 10)
+        limit_order_placement =  exchange.create_limit_sell_order(coin, coin_balance, last_close - 10)
     return limit_order_placement
 
 
@@ -150,13 +161,15 @@ if __name__ == "__main__":
     coin = 'BTC'
     currency = 'USDT'
     pair = coin + '/' + currency
-    timeframe = '5m'
+    timeframe = '1m'
     trade_ratio_to_balance = .3 # 30% of account balance to be used / trade
 
     # waveTrend = calculateWaveTrend(pair, timeframe,  9, 12, 3, -53, 53, True)
     # waveTrend.to_csv('wavetrend.csv')
 
     # pprint(exchange['binance'].fetch_tickers(['BTC/USDT']))
+
+    exchange['gateio'].enableRateLimit  = True
 
     while(True):
         try:
@@ -167,7 +180,7 @@ if __name__ == "__main__":
             pprint(lastMinuteWT)
             print(order)
 
-            time.sleep(5)
+            time.sleep(60)
         except ccxt.NetworkError as e:
             print(e)
         except ccxt.ExchangeError as e:
