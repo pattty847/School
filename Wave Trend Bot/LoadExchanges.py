@@ -1,18 +1,19 @@
 from configparser import ConfigParser
+from datetime import datetime
 import ccxt
 import pandas as pd
 import pprint
 import os
 
+
 class Exchange:
-    # Initialize the Exchange() with a list of exchanges and a config file containing api key pairs
     def __init__(self, exchange_, config_, pair_, timeframe_):
         self.exchange = exchange_
-        self.connection = None
         self.config = config_
         self.pair = pair_
         self.timeframe = timeframe_
         self.bars = None
+        self.api = None
 
 
     def saveNewHistory(self):
@@ -22,28 +23,34 @@ class Exchange:
 
 
     def fetchLastTF(self):
-        lastTF = pd.DataFrame(self.connection.fetch_ohlcv(self.pair, self.timeframe, limit=1))
+        lastTF = pd.DataFrame(self.api.fetch_ohlcv(self.pair, self.timeframe, limit=1))
         self.bars.append(lastTF)
 
-    def loadHistory(self):
+
+    # 1642386240000
+    # This function checks if we have a file with ohlc history and updates the timeframes we missed since last update
+    def loadHistoryOnStartup(self):
         file = 'ohlc/' + self.pair.replace('/', '-') + '.csv'
         if(os.path.isfile(file)):
-            self.bars = pd.read_csv(file)
+            history = pd.read_csv(file)
+            new_data = pd.DataFrame(self.api.fetch_ohlcv(self.pair, self.timeframe, since=history.iloc[-1, 1]))
+            new_data.to_csv(file, mode='a', index=True, header=False)
         else:
-            self.bars = pd.DataFrame(self.connection.fetch_ohlcv(self.pair, self.timeframe))
+            self.bars = pd.DataFrame(self.api.fetch_ohlcv(self.pair, self.timeframe))
             self.bars.to_csv(file)
-        print(self.bars.head)
 
 
+    # This is called first to make a connection to the exchange from the CONFIG file
     def connectExchange(self):
         exchange_class = getattr(ccxt, self.exchange)
         if(self.exchange.upper() in self.config):
             try:
-                self.connection = exchange_class({
+                self.api = exchange_class({
                     'apiKey': self.config[self.exchange.upper()]['apiKey'],
                     'secret': self.config[self.exchange.upper()]['secret'],
                 })
-                self.loadHistory()
+                # function explained above
+                self.loadHistoryOnStartup()
                 print(self.exchange + " - Connected")
             except ccxt.NetworkError as e:
                 print(e)

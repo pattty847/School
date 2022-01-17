@@ -35,5 +35,6 @@ def startBot():
             for pair in pairs:
                 e = Exchange(exchange, config_file, pair, timeframe)
                 e.connectExchange()
+                
 
 startBot()
