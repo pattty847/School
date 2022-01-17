@@ -20,7 +20,6 @@ def mainBotThread(seconds, exchange):
             print(e)
 
 
-
 def startBot():
     exchanges = ['gateio']
     coin = 'BTC'
@@ -29,7 +28,6 @@ def startBot():
     timeframe = '1m'
     # 30% of account balance to be used / trade
     trade_ratio_to_balance = .3
-
     if __name__ == "__main__":
         for exchange in exchanges:
             for pair in pairs:
